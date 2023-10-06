@@ -1,3 +1,7 @@
+using System.Collections.Immutable;
+using CargoTrack_Backend.Database;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +11,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Database context
+builder.Services.AddDbContext<ShippingDbContext>(options => 
+    options.UseSqlServer(builder.Configuration["ConnectionStrings:CargoTrack"])
+);
+
 var app = builder.Build();
+
+// Migrate database. Comment out if you don't need to migrate.
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ShippingDbContext>();
+    context.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
