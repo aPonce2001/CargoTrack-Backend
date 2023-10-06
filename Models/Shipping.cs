@@ -29,5 +29,7 @@ namespace CargoTrack_Backend.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime RegisterDate { get; set; }
+
+        public CargoType CargoType { get; set; }
     }
 }
