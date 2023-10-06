@@ -13,10 +13,10 @@ namespace CargoTrack_Backend.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ShippingId { get; set; }
         public string Description { get; set; }
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         
         [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
         
         public double Weight { get; set; }
         public double Length { get; set; }
