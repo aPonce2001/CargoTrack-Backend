@@ -13,4 +13,14 @@ namespace CargoTrack_Backend.Database
         {
 
         }
+
+        public DbSet<Shipping> Shippings { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Shipping>().ToTable("Shipping");
+            modelBuilder.Entity<Customer>().ToTable("Customer");
+        }
+    }
 }
